@@ -1,0 +1,161 @@
+/* ═══ Vòng 2 – Ghép đôi ═══
+   Header, đồng hồ, popup điểm, màn kết thúc dùng lại từ vong1.css;
+   file này chỉ khai báo phần riêng của vòng 2. */
+
+/* ── Mỗi cặp: gợi ý cố định (trái) + ô thả đáp án (phải) ── */
+.v2-pairs { display: grid; gap: 0.6rem; margin-bottom: 1.2rem; }
+
+.v2-pair {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 0.6rem;
+    align-items: stretch;
+}
+
+.v2-clue {
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--line-soft);
+    border-left: 3px solid var(--copper);
+    border-radius: 12px;
+    background: var(--panel);
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: left;
+    word-break: break-word;
+}
+
+/* ── Ô thả ── */
+.v2-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    padding: 0.25rem;
+    border: 2px dashed var(--line);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+.v2-slot:focus-visible { outline: 2px solid var(--brass-light); outline-offset: 2px; }
+.v2-slot.drag-over { border-color: var(--brass-light); background: rgba(217, 164, 65, 0.12); }
+.v2-slot.filled { border-style: solid; border-color: var(--brass); background: rgba(217, 164, 65, 0.05); }
+.v2-slot.correct { border-color: var(--ok); background: rgba(134, 201, 149, 0.12); animation: v2-pop 0.4s ease; }
+.v2-slot.wrong { border-color: var(--err); background: rgba(236, 122, 98, 0.1); animation: v2-shake 0.4s ease; }
+.v2-slot.revealed { border-color: var(--warn); background: rgba(227, 176, 75, 0.1); }
+
+.v2-slot .v2-card {
+    flex: 1;
+    align-self: stretch;
+    border: none;
+    border-radius: 8px;
+}
+.v2-slot.locked .v2-card { background: transparent; cursor: default; }
+
+/* ── Thẻ đáp án ── */
+.v2-card {
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text);
+    min-height: 44px;
+    padding: 0.55rem 0.8rem;
+    border: 2px solid var(--brass);
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(217, 164, 65, 0.15), rgba(200, 105, 58, 0.1));
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    touch-action: none; /* để kéo trên điện thoại không bị cuộn trang */
+    word-break: break-word;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
+}
+.v2-card:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(217, 164, 65, 0.25); }
+.v2-card:focus-visible { outline: 2px solid var(--brass-light); outline-offset: 2px; }
+.v2-card.lifted { opacity: 0.3; }
+.v2-card:disabled { cursor: default; }
+
+/* Thẻ "ma" đi theo ngón tay / con trỏ khi kéo */
+.v2-card.v2-ghost {
+    position: fixed;
+    z-index: 2000;
+    margin: 0;
+    pointer-events: none;
+    transform: translate(-50%, -65%) scale(1.06);
+    box-shadow: 0 12px 30px rgba(217, 164, 65, 0.4);
+    opacity: 0.95;
+    transition: none;
+}
+
+/* ── Khay thẻ ── */
+.v2-pool-section { margin-bottom: 1.2rem; }
+.v2-pool {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 62px;
+    padding: 0.8rem;
+    border: 2px dashed var(--line-soft);
+    border-radius: var(--radius);
+    background: var(--panel);
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+.v2-pool.drag-over { border-color: var(--brass); background: rgba(217, 164, 65, 0.06); }
+
+/* ── Câu có hình (Hình 6.1): lưới ảnh, ô thả nằm dưới mỗi ảnh ── */
+.v2-pairs.has-img { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.has-img .v2-pair { grid-template-columns: minmax(0, 1fr); gap: 0.4rem; }
+
+.v2-clue.v2-img {
+    position: relative;
+    justify-content: center;
+    aspect-ratio: 6 / 5;
+    padding: 0.4rem;
+    border: 1px solid var(--line-soft);
+    background: rgba(255, 244, 225, 0.92); /* nền sáng để ảnh trong suốt hay nền trắng đều dễ nhìn */
+}
+.v2-img img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.v2-img .tag {
+    position: absolute;
+    top: 0.3rem;
+    left: 0.55rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #6b4a14;
+}
+
+@media (min-width: 600px) {
+    .v2-pairs.has-img { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 420px) {
+    .v2-clue { padding: 0.55rem 0.7rem; font-size: 0.88rem; }
+    .v2-card { padding: 0.5rem 0.6rem; font-size: 0.85rem; }
+}
+
+/* ── Hết giờ / xong: chỉ còn màn kết thúc ── */
+#step-game-2.game-ended .game-header,
+#step-game-2.game-ended .question-section,
+#step-game-2.game-ended .v2-pairs,
+#step-game-2.game-ended .v2-pool-section,
+#step-game-2.game-ended .actions {
+    display: none;
+}
+
+@keyframes v2-pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+@keyframes v2-shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .v2-slot.correct, .v2-slot.wrong { animation: none; }
+}

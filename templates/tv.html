@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Màn hình trình chiếu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap&subset=vietnamese" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tv.css') }}">
+</head>
+<body class="tv-page">
+    <main class="tv-stage" id="tv-stage" aria-live="polite">
+        <header class="tv-topline">
+            <span class="tv-kicker">TRÒ CHƠI CÁCH MẠNG CÔNG NGHIỆP</span>
+            <div class="tv-top-actions"><span class="tv-round" id="tv-round"></span><button type="button" id="tv-fullscreen" aria-label="Bật toàn màn hình">Toàn màn hình ⛶</button></div>
+        </header>
+        <section class="tv-main" id="tv-main">
+            <div class="tv-welcome">
+                <div class="tv-mark">⚙</div>
+                <h1>Chào mừng các đội chơi</h1>
+                <p>Đang chờ Ban Tổ Chức bắt đầu</p>
+            </div>
+        </section>
+        <footer class="tv-footer"><span>ĐIỂM · TƯ DUY · KHÁM PHÁ</span><span id="tv-connection">Đang kết nối…</span></footer>
+    </main>
+    <script src="{{ url_for('static', filename='js/tv.js') }}"></script>
+</body>
+</html>

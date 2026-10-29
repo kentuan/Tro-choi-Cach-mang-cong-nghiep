@@ -1,0 +1,45 @@
+[
+  {
+    "tieu_de": "Xếp bốn cuộc cách mạng công nghiệp theo thứ tự xuất hiện",
+    "trang": "33–37",
+    "su_kien": [
+      { "de": "Động cơ hơi nước và cơ giới hoá", "moc": "Cuối thế kỉ XVIII" },
+      { "de": "Năng lượng điện và sản xuất hàng loạt", "moc": "Cuối thế kỉ XIX" },
+      { "de": "Công nghệ thông tin và tự động hoá", "moc": "Những năm 70 thế kỉ XX" },
+      { "de": "Công nghệ số và trí tuệ nhân tạo", "moc": "2016" }
+    ]
+  },
+  {
+    "tieu_de": "Xếp các sự kiện theo thứ tự thời gian, từ sớm nhất đến muộn nhất",
+    "trang": "34–37",
+    "su_kien": [
+      { "de": "James Watt sáng chế động cơ hơi nước", "moc": "1784" },
+      { "de": "Thomas Edison khai trương nhà máy điện đầu tiên trên thế giới", "moc": "1882" },
+      { "de": "Anh em Wilbur và Orville Wright chế tạo máy bay", "moc": "1903" },
+      { "de": "Các kĩ sư của General Motor sáng chế bộ điều khiển logic có thể lập trình (PLC)", "moc": "1968" },
+      { "de": "Thuật ngữ “Công nghiệp 4.0” lần đầu được sử dụng tại Đức", "moc": "2011" }
+    ]
+  },
+  {
+    "tieu_de": "Xếp các phát minh sau theo thứ tự thời gian, từ sớm nhất đến muộn nhất",
+    "trang": "34–35",
+    "su_kien": [
+      { "de": "Henry Cort sáng chế máy cán thép", "moc": "1783" },
+      { "de": "Edmund Cartwright chế tạo máy dệt cải tiến có con thoi", "moc": "1786" },
+      { "de": "Robert Fulton chế tạo tàu thủy chạy bằng hơi nước", "moc": "1807" },
+      { "de": "George Stephenson phát minh đầu máy xe lửa chạy bằng hơi nước", "moc": "1814" },
+      { "de": "Charles Parsons sáng chế tua bin hơi phản lực", "moc": "1884" }
+    ]
+  },
+  {
+    "tieu_de": "Xếp các sự kiện theo thứ tự thời gian, từ sớm nhất đến muộn nhất",
+    "trang": "35–37",
+    "su_kien": [
+      { "de": "Karl Benz chế tạo xe hơi đầu tiên dùng động cơ đốt trong", "moc": "1885" },
+      { "de": "Hãng Ford Motor chế tạo thành công xe hơi động cơ đốt trong tại Mỹ", "moc": "1908" },
+      { "de": "Thiết kế ENIAC, máy tính điện tử số đầu tiên", "moc": "1943" },
+      { "de": "Hoàn thành ENIAC", "moc": "1946" },
+      { "de": "Diễn đàn kinh tế thế giới với chủ đề “Làm chủ cách mạng công nghiệp lần thứ tư”", "moc": "2016" }
+    ]
+  }
+]

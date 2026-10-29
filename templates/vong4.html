@@ -1,0 +1,56 @@
+<!-- ═══ BƯỚC 7: Vòng 4 – Phân loại vào 4 cuộc cách mạng (cùng trang, không chuyển URL) ═══ -->
+<section id="step-game-4" class="step">
+    <div class="game-container">
+        <header class="game-header">
+            <div class="header-left">
+                <div class="score-box">
+                    <span class="score-label">Điểm</span>
+                    <span class="score-value" id="v4-score">0</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="timer-ring">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="timer-bg" cx="50" cy="50" r="45"/>
+                        <circle class="timer-fill" id="v4-timer-fill" cx="50" cy="50" r="45"/>
+                    </svg>
+                    <span class="timer-text" id="v4-timer-text">{{ vong4_time }}</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="question-counter">
+                    <span class="q-label">Thẻ</span>
+                    <span class="q-value" id="v4-q-current">1</span>/<span class="q-total" id="v4-q-total">?</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="question-section panel">
+            <p class="question-text">Từ khoá này thuộc cuộc cách mạng công nghiệp nào?</p>
+        </section>
+
+        <!-- Thẻ từ khoá: hiện lần lượt từng thẻ -->
+        <section class="v4-stage">
+            <div class="v4-card" id="v4-card">Đang tải câu hỏi...</div>
+        </section>
+
+        <!-- 4 ô cách mạng công nghiệp: bấm, kéo thẻ vào, hoặc bấm phím 1–4 -->
+        <section class="v4-bins-section">
+            <p class="section-label">Chọn một ô (hoặc kéo thẻ vào ô, hoặc bấm phím 1–4)</p>
+            <div class="v4-bins" id="v4-bins"></div>
+        </section>
+
+        <div class="actions">
+            <button class="btn btn-ghost skip-btn" id="v4-skip" disabled>Bỏ qua</button>
+        </div>
+        <div class="feedback" id="v4-feedback"></div>
+
+        <section class="end-screen panel" id="v4-end" style="display:none;">
+            <div class="big" id="v4-end-icon">⏱️</div>
+            <h2 id="v4-end-title">Hết giờ!</h2>
+            <p>Tổng điểm của bạn: <strong id="v4-final-score">0</strong></p>
+            <p class="end-detail" id="v4-end-detail"></p>
+            <p class="end-note">Đang quay về màn hình chờ...</p>
+        </section>
+    </div>
+</section>

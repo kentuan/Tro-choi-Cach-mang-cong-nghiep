@@ -1,0 +1,138 @@
+/* ═══ Lobby dùng chung: trang BTC + màn hình chờ của đội chơi ═══ */
+[hidden] { display: none !important; }
+
+/* ── Thanh trạng thái ── */
+.status-bar {
+    display: flex; flex-wrap: wrap;
+    justify-content: space-between; align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+}
+.status-bar h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+}
+.status-bar h2 .count { color: var(--brass-light); }
+
+.status-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-weight: 600; font-size: 0.9rem;
+    border: 1px solid transparent;
+}
+.status-waiting { color: var(--warn); background: rgba(227, 176, 75, 0.1); border-color: rgba(227, 176, 75, 0.35); }
+.status-ready   { color: var(--brass-light); background: rgba(240, 201, 120, 0.1); border-color: rgba(240, 201, 120, 0.4); }
+.status-started { color: var(--ok); background: rgba(134, 201, 149, 0.1); border-color: rgba(134, 201, 149, 0.35); }
+
+/* ── Thẻ đội ── */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.team-card {
+    position: relative;
+    padding: 1.2rem 1.3rem;
+    border-radius: var(--radius);
+    border: 1px dashed var(--line-soft);
+    background: var(--panel);
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+    min-height: 118px;
+    text-align: left;
+}
+.team-card .head {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+}
+.team-card .group-label {
+    font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+}
+.team-card .team-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem; font-weight: 700;
+    word-break: break-word;
+}
+.team-card .team-name.empty { color: var(--faint); font-family: inherit; font-size: 1rem; font-weight: 400; font-style: italic; }
+
+/* Đã chọn nhóm, đang nhập tên */
+.team-card.typing {
+    border-style: solid;
+    border-color: rgba(227, 176, 75, 0.45);
+    background: rgba(227, 176, 75, 0.06);
+}
+.team-card.typing .team-name { color: var(--muted); }
+
+/* Đã xác nhận tên */
+.team-card.confirmed {
+    border-style: solid;
+    border-color: rgba(134, 201, 149, 0.5);
+    background: rgba(134, 201, 149, 0.07);
+    transform: translateY(-2px);
+}
+.team-card.confirmed .team-name { color: var(--text); }
+
+/* Thẻ của chính đội đang xem (trang đội chơi) */
+.team-card.mine { box-shadow: 0 0 0 2px rgba(240, 201, 120, 0.5); }
+.team-card.mine .group-label::after { content: " · đội của bạn"; text-transform: none; letter-spacing: 0; color: var(--brass-light); }
+
+/* ── Bảng điểm từng vòng ── */
+.scoreboards { margin-top: 1.6rem; display: grid; gap: 1rem; text-align: left; }
+
+.board {
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--line-soft);
+    background: var(--panel);
+}
+.board.open {
+    border-color: rgba(240, 201, 120, 0.35);
+    background: rgba(240, 201, 120, 0.05);
+}
+.board-head {
+    display: flex; flex-wrap: wrap;
+    justify-content: space-between; align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.7rem;
+}
+.board-head h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.15rem;
+}
+.board-locked, .board-empty { color: var(--faint); font-size: 0.9rem; font-style: italic; }
+
+.board-list { list-style: none; display: grid; gap: 0.4rem; }
+.board-row {
+    display: grid;
+    grid-template-columns: 2rem 1fr auto;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.55rem 0.8rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+}
+.board-row .rank {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 800; font-size: 1.1rem;
+    color: var(--muted);
+    text-align: center;
+}
+.board-row.top .rank { color: var(--brass-light); }
+.board-row .who { min-width: 0; }
+.board-row .who .n { font-weight: 600; word-break: break-word; }
+.board-row .who .g { font-size: 0.75rem; color: var(--muted); }
+.board-row .pts {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 800; font-size: 1.3rem;
+    color: var(--brass-light);
+    font-variant-numeric: tabular-nums;
+}
+.board-row.mine { background: rgba(217, 164, 65, 0.1); outline: 1px solid var(--brass); }
+
+@media (max-width: 560px) {
+    .team-grid { grid-template-columns: 1fr; }
+    .status-bar { justify-content: center; text-align: center; }
+}

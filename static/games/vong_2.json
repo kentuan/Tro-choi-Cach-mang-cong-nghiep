@@ -1,0 +1,65 @@
+[
+  {
+    "tieu_de": "Ghép thuật ngữ với hình đại diện của mỗi cuộc cách mạng công nghiệp",
+    "trang": 33,
+    "cap": [
+      { "de": "(a)", "hinh": "a.png", "dap_an": "Động cơ hơi nước" },
+      { "de": "(b)", "hinh": "b.png", "dap_an": "Năng lượng điện" },
+      { "de": "(c)", "hinh": "c.png", "dap_an": "Công nghệ thông tin" },
+      { "de": "(d)", "hinh": "d.png", "dap_an": "Kết nối thông minh" }
+    ]
+  },
+  {
+    "tieu_de": "Cách mạng công nghiệp lần thứ nhất: ghép phát minh với người sáng chế",
+    "trang": 34,
+    "cap": [
+      { "de": "Máy cán thép", "dap_an": "Henry Cort" },
+      { "de": "Động cơ hơi nước", "dap_an": "James Watt" },
+      { "de": "Máy dệt cải tiến có con thoi", "dap_an": "Edmund Cartwright" },
+      { "de": "Tàu thủy chạy bằng hơi nước", "dap_an": "Robert Fulton" },
+      { "de": "Đầu máy xe lửa chạy bằng hơi nước", "dap_an": "George Stephenson" }
+    ]
+  },
+  {
+    "tieu_de": "Cách mạng công nghiệp lần thứ nhất: ghép phát minh với năm",
+    "trang": 34,
+    "cap": [
+      { "de": "Máy cán thép", "dap_an": "1783" },
+      { "de": "Động cơ hơi nước", "dap_an": "1784" },
+      { "de": "Máy dệt cải tiến có con thoi", "dap_an": "1786" },
+      { "de": "Tàu thủy chạy bằng hơi nước", "dap_an": "1807" },
+      { "de": "Đầu máy xe lửa chạy bằng hơi nước", "dap_an": "1814" }
+    ]
+  },
+  {
+    "tieu_de": "Cách mạng công nghiệp lần thứ hai: ghép phát minh với người hoặc hãng sáng chế",
+    "trang": 35,
+    "cap": [
+      { "de": "Nhà máy điện đầu tiên trên thế giới", "dap_an": "Thomas Edison" },
+      { "de": "Tua bin hơi phản lực", "dap_an": "Charles Parsons" },
+      { "de": "Xe hơi đầu tiên dùng động cơ đốt trong", "dap_an": "Karl Benz" },
+      { "de": "Máy bay", "dap_an": "Wilbur và Orville Wright" },
+      { "de": "Xe hơi động cơ đốt trong chế tạo thành công tại Mỹ", "dap_an": "Hãng Ford Motor" }
+    ]
+  },
+  {
+    "tieu_de": "Cách mạng công nghiệp lần thứ hai: ghép phát minh với năm",
+    "trang": 35,
+    "cap": [
+      { "de": "Nhà máy điện đầu tiên trên thế giới", "dap_an": "1882" },
+      { "de": "Tua bin hơi phản lực", "dap_an": "1884" },
+      { "de": "Xe hơi đầu tiên dùng động cơ đốt trong", "dap_an": "1885" },
+      { "de": "Máy bay", "dap_an": "1903" },
+      { "de": "Xe hơi động cơ đốt trong chế tạo thành công tại Mỹ", "dap_an": "1908" }
+    ]
+  },
+  {
+    "tieu_de": "Cách mạng công nghiệp lần thứ ba: ghép phát minh với người hoặc đơn vị sáng chế",
+    "trang": 36,
+    "cap": [
+      { "de": "Bóng bán dẫn", "dap_an": "John Bardeen, Walter Brattain và William Shockley" },
+      { "de": "Máy tính điện tử số đầu tiên (ENIAC)", "dap_an": "John Mauchly và John Presper Eckert" },
+      { "de": "Bộ điều khiển logic có thể lập trình (PLC), năm 1968", "dap_an": "Các kĩ sư của General Motor" }
+    ]
+  }
+]

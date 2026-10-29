@@ -1,0 +1,207 @@
+/* ═══ Trang đội chơi ═══ */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 560px;
+    text-align: center;
+}
+
+/* ── Thanh tiến trình 3 bước ── */
+.progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+}
+.progress .dot {
+    width: 34px; height: 4px;
+    border-radius: 4px;
+    background: var(--line-soft);
+    transition: background 0.3s ease, width 0.3s ease;
+}
+.progress .dot.done   { background: var(--brass); }
+.progress .dot.active { background: var(--brass-light); width: 54px; }
+
+/* ── Các bước ── */
+.step { display: none; }
+.step.active { display: block; animation: rise 0.4s ease both; }
+@keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.step-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+.step-desc { color: var(--muted); font-size: 0.95rem; }
+
+/* ── Chọn nhóm ── */
+.group-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    margin-top: 1.4rem;
+}
+
+.group-btn {
+    position: relative;
+    font: inherit;
+    padding: 1.3rem 0.8rem;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--text);
+    cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.group-btn .num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.2rem; font-weight: 800; line-height: 1;
+    color: var(--brass-light);
+}
+.group-btn .label { font-weight: 600; font-size: 1rem; }
+.group-btn .state { font-size: 0.78rem; color: var(--muted); }
+
+.group-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    border-color: var(--brass);
+    background: var(--panel-strong);
+    box-shadow: 0 10px 26px rgba(217, 164, 65, 0.16);
+}
+.group-btn:focus-visible { outline: 2px solid var(--brass-light); outline-offset: 3px; }
+.group-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    background: rgba(255, 255, 255, 0.02);
+}
+.group-btn:disabled .num { color: var(--faint); }
+
+/* ── Nhập tên ── */
+.selected-chip { margin-top: 0.9rem; }
+
+.name-input {
+    width: 100%;
+    margin-top: 1.2rem;
+    padding: 0.95rem 1rem;
+    font: inherit;
+    font-size: 1.15rem;
+    text-align: center;
+    color: var(--text);
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.name-input::placeholder { color: var(--faint); }
+.name-input:focus {
+    border-color: var(--brass);
+    box-shadow: 0 0 0 4px rgba(217, 164, 65, 0.15);
+}
+.counter { margin-top: 0.4rem; font-size: 0.8rem; color: var(--faint); }
+
+.confirm-btn { margin-top: 1.1rem; min-width: 180px; }
+
+/* ── Màn hình chờ (lobby giống trang BTC) ── */
+.my-team { margin-bottom: 1.4rem; }
+.team-name-display {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--brass-light);
+    word-break: break-word;
+}
+.group-display { margin-top: 0.4rem; }
+
+#step-waiting .status-bar { justify-content: center; }
+#step-waiting .team-card { min-height: 0; padding: 0.85rem 1rem; }
+#step-waiting .team-card .team-name { font-size: 1.15rem; }
+
+.lobby-wait { margin-top: 1.4rem; }
+.spinner {
+    width: 30px; height: 30px;
+    margin: 0 auto 0.8rem;
+    border: 3px solid var(--line-soft);
+    border-top-color: var(--brass);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.waiting-text { color: var(--text); font-size: 1.05rem; }
+.waiting-sub  { color: var(--muted); font-size: 0.88rem; margin-top: 0.3rem; min-height: 1.3em; }
+
+/* ── Đếm ngược trước vòng ── */
+.countdown-overlay {
+    position: fixed; inset: 0; z-index: 50;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.4rem;
+    background: rgba(14, 12, 10, 0.94);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    text-align: center;
+}
+.countdown-round {
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--muted);
+}
+.countdown-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 800;
+    font-size: clamp(7rem, 32vw, 12rem);
+    line-height: 1;
+    color: var(--brass-light);
+    text-shadow: 0 0 40px rgba(217, 164, 65, 0.4);
+}
+.countdown-number.go { font-size: clamp(3rem, 14vw, 5.5rem); color: var(--ok); text-shadow: 0 0 40px rgba(134, 201, 149, 0.4); }
+.countdown-number.tick { animation: count-pop 0.9s ease-out both; }
+@keyframes count-pop {
+    0%   { opacity: 0; transform: scale(1.6); }
+    25%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+.countdown-sub { color: var(--faint); font-size: 0.95rem; }
+
+/* ── Đã bắt đầu ── */
+.started-box {
+    border-color: rgba(134, 201, 149, 0.4);
+    background: rgba(134, 201, 149, 0.07);
+}
+.started-box .big { font-size: 2.6rem; }
+.started-box h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--ok);
+    font-size: 1.6rem;
+    margin-top: 0.3rem;
+}
+.started-box p { color: var(--muted); margin-top: 0.6rem; }
+
+/* ── Màn kết thúc vòng ── */
+.end-screen .end-detail { font-size: 0.95rem; margin-top: 0.4rem; }
+.end-screen .end-note { font-size: 0.9rem; color: var(--faint); margin-top: 0.8rem; }
+
+/* ── Đang chơi: bỏ tiêu đề + thanh tiến trình, mở rộng khung ── */
+body.in-game { align-items: flex-start; padding: 1rem; }
+body.in-game .hero,
+body.in-game .progress { display: none; }
+body.in-game .container { max-width: 700px; }
+
+@media (max-width: 420px) {
+    .panel { padding: 1.1rem; }
+    .group-btn .num { font-size: 1.9rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .countdown-number.tick { animation: none; }
+}

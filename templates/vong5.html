@@ -1,0 +1,73 @@
+<!-- ═══ BƯỚC 8: Vòng 5 – Nhanh tay & cược điểm (cùng trang, không chuyển URL) ═══
+     Vòng này do server điều khiển từng câu; giao diện chỉ vẽ lại theo trạng thái server gửi (v5_state). -->
+<section id="step-game-5" class="step">
+    <div class="game-container">
+        <header class="game-header">
+            <div class="header-left">
+                <div class="score-box">
+                    <span class="score-label">Điểm</span>
+                    <span class="score-value" id="v5-score">0</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="timer-ring">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="timer-bg" cx="50" cy="50" r="45"/>
+                        <circle class="timer-fill" id="v5-timer-fill" cx="50" cy="50" r="45"/>
+                    </svg>
+                    <span class="timer-text" id="v5-timer-text">–</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="question-counter">
+                    <span class="q-label">Câu</span>
+                    <span class="q-value" id="v5-q-current">–</span>/<span class="q-total" id="v5-q-total">?</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="question-section panel">
+            <p class="question-text" id="v5-status">Chuẩn bị câu hỏi đầu tiên...</p>
+        </section>
+
+        <div class="v5-body">
+            <!-- Pha 1: chọn mức cược (chỉ biết chủ đề) -->
+            <section id="v5-prep" hidden>
+                <p class="v5-topic" id="v5-topic"></p>
+                <p class="section-label">Mức cược: đúng được +cược, sai bị −cược</p>
+                <div class="v5-bets" id="v5-bets"></div>
+            </section>
+
+            <!-- Pha 2: câu hỏi hiện ra, đội nhanh nhất bấm chuông giành quyền trả lời -->
+            <section id="v5-question" class="v5-question panel" hidden>
+                <p class="v5-question-topic" id="v5-question-topic"></p>
+                <p class="v5-question-text" id="v5-question-text"></p>
+            </section>
+
+            <section id="v5-buzz" class="v5-buzz" hidden>
+                <button type="button" class="v5-buzz-btn" id="v5-buzz-btn">🔔 BẤM CHUÔNG!</button>
+                <p class="v5-buzz-info" id="v5-buzz-info"></p>
+            </section>
+
+            <!-- Chỉ đội đang giữ chuông mới thấy các lựa chọn -->
+            <section id="v5-options" class="v5-options" hidden></section>
+
+            <!-- Pha 3: hiện đáp án -->
+            <section id="v5-reveal" class="v5-reveal panel" hidden>
+                <h3 id="v5-reveal-title"></h3>
+                <p id="v5-reveal-text"></p>
+            </section>
+
+            <ul class="v5-attempts" id="v5-attempts"></ul>
+        </div>
+
+        <div class="feedback" id="v5-feedback"></div>
+
+        <section class="end-screen panel" id="v5-end" style="display:none;">
+            <div class="big" id="v5-end-icon">🏆</div>
+            <h2 id="v5-end-title">Kết thúc vòng chung kết!</h2>
+            <p>Tổng điểm của bạn: <strong id="v5-final-score">0</strong></p>
+            <p class="end-note">Đang quay về màn hình chờ...</p>
+        </section>
+    </div>
+</section>

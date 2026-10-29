@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Trò chơi Cách mạng công nghiệp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Playfair+Display:wght@700;800&display=swap&subset=vietnamese" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lobby.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vong1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vong2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vong3.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vong4.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vong5.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vong6.css') }}">
+</head>
+<body>
+    <div class="conn-banner" id="conn-banner">Mất kết nối với máy chủ, đang thử kết nối lại...</div>
+
+    <!-- Đếm ngược trước khi vào vòng (server điều khiển thời điểm bắt đầu) -->
+    <div class="countdown-overlay" id="countdown-overlay" role="status" aria-live="assertive" hidden>
+        <div class="countdown-round" id="countdown-round">Vòng 1</div>
+        <div class="countdown-number" id="countdown-number">3</div>
+        <div class="countdown-sub">Chuẩn bị...</div>
+    </div>
+
+    <main class="container">
+        <header class="hero">
+            <svg class="gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="3.2"/>
+                <path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/>
+                <circle cx="12" cy="12" r="6.8"/>
+            </svg>
+            <h1 class="brand">Cách mạng Công nghiệp</h1>
+            <p class="tagline">Trò chơi kiến thức lịch sử</p>
+        </header>
+
+        <div class="progress" aria-hidden="true">
+            <span class="dot" id="dot-1"></span>
+            <span class="dot" id="dot-2"></span>
+            <span class="dot" id="dot-3"></span>
+        </div>
+
+        <!-- ═══ BƯỚC 1: Chọn nhóm ═══ -->
+        <section id="step-select-group" class="step active panel">
+            <h2 class="step-title">Chọn nhóm của bạn</h2>
+            <p class="step-desc">Mỗi nhóm chỉ có một đội. Nhóm đã được chọn sẽ bị khóa.</p>
+            <div class="group-grid">
+                <button class="group-btn" data-group="Nhóm 1"><span class="num">1</span><span class="label">Nhóm 1</span><span class="state"></span></button>
+                <button class="group-btn" data-group="Nhóm 2"><span class="num">2</span><span class="label">Nhóm 2</span><span class="state"></span></button>
+                <button class="group-btn" data-group="Nhóm 4"><span class="num">4</span><span class="label">Nhóm 4</span><span class="state"></span></button>
+                <button class="group-btn" data-group="Nhóm 5"><span class="num">5</span><span class="label">Nhóm 5</span><span class="state"></span></button>
+            </div>
+            <p id="error-select" class="error-msg" role="alert"></p>
+        </section>
+
+        <!-- ═══ BƯỚC 2: Nhập tên đội ═══ -->
+        <section id="step-enter-name" class="step panel">
+            <h2 class="step-title">Đặt tên cho đội</h2>
+            <p class="step-desc">Bấm Xác nhận để chốt tên. Ban tổ chức chỉ bắt đầu khi mọi đội đã xác nhận.</p>
+            <div class="selected-chip"><span class="chip ok" id="selected-group-label"></span></div>
+            <input type="text" class="name-input" id="team-name-input"
+                   placeholder="Nhập tên đội..." maxlength="30" autocomplete="off">
+            <div class="counter"><span id="name-count">0</span>/30</div>
+            <button class="btn btn-primary confirm-btn" id="confirm-name-btn">Xác nhận</button>
+            <p id="error-name" class="error-msg" role="alert"></p>
+        </section>
+
+        <!-- ═══ BƯỚC 3: Màn hình chờ (giống trang BTC, chỉ xem) ═══
+             Dùng cho cả lúc chờ vòng 1 lẫn giữa các vòng sau khi chơi xong -->
+        <section id="step-waiting" class="step panel">
+            <div class="my-team">
+                <div class="team-name-display" id="display-team-name"></div>
+                <div class="group-display"><span class="chip ok" id="display-group"></span></div>
+            </div>
+
+            <div class="status-bar">
+                <h2>Các đội tham gia (<span class="count" id="team-count">0</span>/4)</h2>
+                <span id="status-badge" class="status-badge status-waiting">⏳ Đang chờ các đội tham gia</span>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card" id="card-nhom-1">
+                    <div class="head"><span class="group-label">Nhóm 1</span><span class="chip" id="chip-nhom-1">Chưa vào</span></div>
+                    <div class="team-name empty" id="name-nhom-1">Chưa có đội</div>
+                </div>
+                <div class="team-card" id="card-nhom-2">
+                    <div class="head"><span class="group-label">Nhóm 2</span><span class="chip" id="chip-nhom-2">Chưa vào</span></div>
+                    <div class="team-name empty" id="name-nhom-2">Chưa có đội</div>
+                </div>
+                <div class="team-card" id="card-nhom-4">
+                    <div class="head"><span class="group-label">Nhóm 4</span><span class="chip" id="chip-nhom-4">Chưa vào</span></div>
+                    <div class="team-name empty" id="name-nhom-4">Chưa có đội</div>
+                </div>
+                <div class="team-card" id="card-nhom-5">
+                    <div class="head"><span class="group-label">Nhóm 5</span><span class="chip" id="chip-nhom-5">Chưa vào</span></div>
+                    <div class="team-name empty" id="name-nhom-5">Chưa có đội</div>
+                </div>
+            </div>
+
+            <div class="lobby-wait">
+                <div class="spinner"></div>
+                <div class="waiting-text" id="waiting-text">Đang chờ BTC bắt đầu trò chơi...</div>
+                <div class="waiting-sub" id="waiting-sub"></div>
+            </div>
+
+            <!-- Bảng điểm: mỗi vòng chỉ hiện sau khi BTC công bố -->
+            <div class="scoreboards" id="scoreboards" hidden></div>
+            <section class="final-board panel" id="team-final-board" hidden><h2>Xếp hạng chung cuộc</h2><div id="team-final-rows"></div></section>
+        </section>
+
+        <!-- ═══ BƯỚC 4: Vòng 1 – Sắp xếp chữ cái (cùng trang, không chuyển URL) ═══ -->
+        <section id="step-game" class="step">
+            <div class="game-container">
+                <header class="game-header">
+                    <div class="header-left">
+                        <div class="score-box">
+                            <span class="score-label">Điểm</span>
+                            <span class="score-value" id="score-value">0</span>
+                        </div>
+                    </div>
+                    <div class="header-center">
+                        <div class="timer-ring" id="timer-ring">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="timer-bg" cx="50" cy="50" r="45"/>
+                                <circle class="timer-fill" id="timer-fill" cx="50" cy="50" r="45"/>
+                            </svg>
+                            <span class="timer-text" id="timer-text">{{ vong1_time }}</span>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <div class="question-counter">
+                            <span class="q-label">Câu</span>
+                            <span class="q-value" id="q-current">1</span>/<span class="q-total" id="q-total">?</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="question-section panel" id="question-section">
+                    <p class="question-text" id="question-text">Đang tải câu hỏi...</p>
+                </section>
+
+                <section class="tiles-section" id="tiles-section">
+                    <p class="section-label">Các chữ cái (kéo vào ô bên dưới)</p>
+                    <div class="tiles-pool" id="tiles-pool"></div>
+                </section>
+
+                <section class="answer-section" id="answer-section">
+                    <p class="section-label">Đáp án của bạn</p>
+                    <div class="answer-slots" id="answer-slots"></div>
+                </section>
+
+                <div class="actions">
+                    <button class="btn btn-primary check-btn" id="check-btn" disabled>Kiểm tra</button>
+                    <button class="btn btn-ghost skip-btn" id="skip-btn" disabled>Bỏ qua</button>
+                </div>
+                <div class="feedback" id="feedback"></div>
+
+                <section class="end-screen panel" id="end-screen" style="display:none;">
+                    <div class="big" id="end-icon">⏱️</div>
+                    <h2 id="end-title">Hết giờ!</h2>
+                    <p>Tổng điểm của bạn: <strong id="final-score">0</strong></p>
+                    <p class="end-detail" id="end-detail"></p>
+                    <p class="end-note">Đang quay về màn hình chờ...</p>
+                </section>
+            </div>
+        </section>
+
+        <!-- ═══ BƯỚC 5: Vòng 2 – Ghép đôi (file riêng: templates/vong2.html) ═══ -->
+        {% include "vong2.html" %}
+
+        <!-- ═══ BƯỚC 6: Vòng 3 – Xếp dòng thời gian (file riêng: templates/vong3.html) ═══ -->
+        {% include "vong3.html" %}
+
+        <!-- ═══ BƯỚC 7: Vòng 4 – Phân loại (file riêng: templates/vong4.html) ═══ -->
+        {% include "vong4.html" %}
+
+        <!-- ═══ BƯỚC 8: Vòng 5 – Nhanh tay & cược điểm (file riêng: templates/vong5.html) ═══ -->
+        {% include "vong5.html" %}
+
+        <!-- Vòng 6 – Poker kiến thức -->
+        {% include "vong6.html" %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/lobby.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vong1.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vong2.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vong3.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vong4.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vong5.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vong6.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

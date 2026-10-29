@@ -1,0 +1,58 @@
+<!-- ═══ BƯỚC 6: Vòng 3 – Xếp dòng thời gian (cùng trang, không chuyển URL) ═══ -->
+<section id="step-game-3" class="step">
+    <div class="game-container">
+        <header class="game-header">
+            <div class="header-left">
+                <div class="score-box">
+                    <span class="score-label">Điểm</span>
+                    <span class="score-value" id="v3-score">0</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="timer-ring">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="timer-bg" cx="50" cy="50" r="45"/>
+                        <circle class="timer-fill" id="v3-timer-fill" cx="50" cy="50" r="45"/>
+                    </svg>
+                    <span class="timer-text" id="v3-timer-text">{{ vong3_time }}</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="question-counter">
+                    <span class="q-label">Câu</span>
+                    <span class="q-value" id="v3-q-current">1</span>/<span class="q-total" id="v3-q-total">?</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="question-section panel">
+            <p class="question-text" id="v3-prompt">Đang tải câu hỏi...</p>
+        </section>
+
+        <!-- Dòng thời gian: các ô đánh số từ trên xuống, ô 1 là sớm nhất -->
+        <section class="v3-timeline">
+            <p class="v3-edge">▲ Sớm nhất</p>
+            <div class="v3-rows" id="v3-rows"></div>
+            <p class="v3-edge v3-edge-end">▼ Muộn nhất</p>
+        </section>
+
+        <section class="v2-pool-section">
+            <p class="section-label">Thẻ sự kiện (kéo vào ô, hoặc bấm thẻ để tự điền vào ô trống đầu tiên)</p>
+            <div class="v2-pool" id="v3-pool"></div>
+        </section>
+
+        <div class="actions">
+            <button class="btn btn-primary check-btn" id="v3-check" disabled>Kiểm tra</button>
+            <button class="btn btn-ghost skip-btn" id="v3-skip" disabled>Bỏ qua</button>
+        </div>
+        <div class="feedback" id="v3-feedback"></div>
+
+        <section class="end-screen panel" id="v3-end" style="display:none;">
+            <div class="big" id="v3-end-icon">⏱️</div>
+            <h2 id="v3-end-title">Hết giờ!</h2>
+            <p>Tổng điểm của bạn: <strong id="v3-final-score">0</strong></p>
+            <p class="end-detail" id="v3-end-detail"></p>
+            <p class="end-note">Đang quay về màn hình chờ...</p>
+        </section>
+    </div>
+</section>

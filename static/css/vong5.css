@@ -1,0 +1,151 @@
+/* ═══ Vòng 5 – Nhanh tay & cược điểm ═══
+   Header, đồng hồ, popup điểm, màn kết thúc dùng lại từ vong1.css. */
+
+.v5-body { display: grid; gap: 1rem; margin-bottom: 1rem; }
+
+/* ── Pha cược ── */
+.v5-topic {
+    margin-bottom: 1rem;
+    text-align: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--brass-light);
+}
+.v5-bets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; }
+.v5-bet {
+    font: inherit;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 1rem 0.5rem;
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    background: var(--panel);
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.v5-bet:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--brass); }
+.v5-bet:focus-visible { outline: 2px solid var(--brass-light); outline-offset: 3px; }
+.v5-bet:disabled { cursor: not-allowed; opacity: 0.5; }
+.v5-bet .num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--brass-light);
+}
+.v5-bet .sub { font-size: 0.75rem; color: var(--muted); }
+.v5-bet.selected {
+    border-color: var(--brass-light);
+    background: rgba(217, 164, 65, 0.14);
+    box-shadow: 0 0 0 3px rgba(240, 201, 120, 0.3);
+}
+
+/* ── Câu hỏi ── */
+.v5-question { text-align: center; }
+.v5-question-topic {
+    margin-bottom: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+.v5-question-text { font-size: 1.15rem; line-height: 1.6; font-weight: 500; }
+
+/* ── Nút bấm chuông ── */
+.v5-buzz { text-align: center; }
+.v5-buzz-btn {
+    width: 100%;
+    padding: 1.3rem 1rem;
+    font: inherit;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #231a0c;
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--brass-light), var(--copper));
+    box-shadow: 0 8px 28px rgba(217, 164, 65, 0.4);
+    cursor: pointer;
+    animation: v5-pulse 1.2s ease-in-out infinite;
+}
+.v5-buzz-btn:active:not(:disabled) { transform: scale(0.98); }
+.v5-buzz-btn:focus-visible { outline: 2px solid var(--brass-light); outline-offset: 4px; }
+.v5-buzz-btn:disabled { opacity: 0.4; cursor: not-allowed; animation: none; box-shadow: none; }
+.v5-buzz-info { margin-top: 0.6rem; font-size: 0.9rem; color: var(--muted); }
+
+/* ── Các lựa chọn (chỉ đội giữ chuông thấy) ── */
+.v5-options { display: grid; gap: 0.6rem; }
+.v5-option {
+    font: inherit;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border: 2px solid var(--brass);
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(217, 164, 65, 0.15), rgba(200, 105, 58, 0.1));
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.v5-option:hover:not(:disabled) { transform: translateX(4px); box-shadow: 0 6px 16px rgba(217, 164, 65, 0.25); }
+.v5-option:focus-visible { outline: 2px solid var(--brass-light); outline-offset: 2px; }
+.v5-option:disabled { opacity: 0.55; cursor: default; }
+.v5-option .key {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    background: var(--brass);
+    color: #231a0c;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+/* ── Hiện đáp án ── */
+.v5-reveal { text-align: center; border-color: rgba(134, 201, 149, 0.4); background: rgba(134, 201, 149, 0.07); }
+.v5-reveal h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem; color: var(--ok); }
+.v5-reveal.none { border-color: rgba(227, 176, 75, 0.4); background: rgba(227, 176, 75, 0.07); }
+.v5-reveal.none h3 { color: var(--warn); }
+.v5-reveal p { margin-top: 0.5rem; color: var(--text); line-height: 1.5; white-space: pre-line; }
+
+/* ── Các lượt trả lời trong câu (không hiện điểm) ── */
+.v5-attempts { list-style: none; display: grid; gap: 0.3rem; text-align: center; }
+.v5-attempts li { font-size: 0.88rem; color: var(--muted); }
+.v5-attempts li.ok { color: var(--ok); }
+.v5-attempts li.bad { color: var(--err); }
+
+/* Popup điểm bị trừ (cũng có trong vong4.css; khai báo lại để vòng 5 không phụ thuộc file khác) */
+.score-popup.neg { color: var(--err); text-shadow: 0 4px 20px rgba(236, 122, 98, 0.5); }
+
+/* ── Hết giờ / xong: chỉ còn màn kết thúc ── */
+#step-game-5.game-ended .game-header,
+#step-game-5.game-ended .question-section,
+#step-game-5.game-ended .v5-body,
+#step-game-5.game-ended .feedback {
+    display: none;
+}
+
+@keyframes v5-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.025); }
+}
+@media (max-width: 420px) {
+    .v5-bet .num { font-size: 1.6rem; }
+    .v5-question-text { font-size: 1.05rem; }
+    .v5-buzz-btn { font-size: 1.3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .v5-buzz-btn { animation: none; }
+}

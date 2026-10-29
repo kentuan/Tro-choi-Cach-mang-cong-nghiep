@@ -1,0 +1,160 @@
+/* ═══ Base chung cho cả trang đội chơi và trang BTC ═══ */
+:root {
+    --bg: #14110f;
+    --panel: rgba(255, 244, 225, 0.045);
+    --panel-strong: rgba(255, 244, 225, 0.08);
+    --line: rgba(232, 196, 140, 0.2);
+    --line-soft: rgba(255, 244, 225, 0.1);
+    --text: #f3ead9;
+    --muted: #a99a82;
+    --faint: #6f6455;
+    --brass: #d9a441;
+    --brass-light: #f0c978;
+    --copper: #c8693a;
+    --ok: #86c995;
+    --warn: #e3b04b;
+    --err: #ec7a62;
+    --radius: 16px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { color-scheme: dark; }
+
+body {
+    font-family: 'Be Vietnam Pro', 'Segoe UI', system-ui, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* Nền: ánh sáng đồng + lưới kỹ thuật mờ */
+body::before {
+    content: "";
+    position: fixed; inset: 0; z-index: -2;
+    background:
+        radial-gradient(900px 500px at 12% -10%, rgba(217, 164, 65, 0.16), transparent 60%),
+        radial-gradient(800px 500px at 100% 110%, rgba(200, 105, 58, 0.16), transparent 60%),
+        linear-gradient(160deg, #17130f, #0e0c0a);
+}
+body::after {
+    content: "";
+    position: fixed; inset: 0; z-index: -1;
+    background-image:
+        linear-gradient(rgba(255, 235, 200, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 235, 200, 0.03) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+    pointer-events: none;
+}
+
+/* ── Tiêu đề ── */
+.hero { text-align: center; margin-bottom: 1.8rem; }
+
+.gear {
+    width: 54px; height: 54px;
+    color: var(--brass);
+    animation: turn 20s linear infinite;
+    filter: drop-shadow(0 0 14px rgba(217, 164, 65, 0.35));
+}
+@keyframes turn { to { transform: rotate(360deg); } }
+
+.brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 800;
+    font-size: clamp(1.7rem, 5vw, 2.3rem);
+    letter-spacing: 0.01em;
+    margin-top: 0.4rem;
+    background: linear-gradient(100deg, var(--brass-light), var(--brass) 55%, var(--copper));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.tagline {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: 0.15rem;
+}
+
+/* ── Panel ── */
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 1.4rem;
+    backdrop-filter: blur(6px);
+}
+
+/* ── Nút ── */
+.btn {
+    font: inherit;
+    font-weight: 600;
+    padding: 0.85rem 1.8rem;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+.btn:hover:not(:disabled) { transform: translateY(-2px); }
+.btn:focus-visible { outline: 2px solid var(--brass-light); outline-offset: 3px; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-primary {
+    color: #231a0c;
+    background: linear-gradient(135deg, var(--brass-light), var(--brass));
+    box-shadow: 0 6px 20px rgba(217, 164, 65, 0.28);
+}
+.btn-primary:hover:not(:disabled) { box-shadow: 0 10px 28px rgba(217, 164, 65, 0.42); }
+
+.btn-ghost {
+    color: var(--text);
+    background: transparent;
+    border-color: var(--line);
+}
+.btn-ghost:hover:not(:disabled) { background: var(--panel-strong); border-color: var(--brass); }
+
+/* ── Chip trạng thái ── */
+.chip {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.22rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.78rem; font-weight: 600;
+    border: 1px solid var(--line-soft);
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.03);
+}
+.chip::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%;
+    background: currentColor;
+}
+.chip.warn  { color: var(--warn); border-color: rgba(227, 176, 75, 0.35); background: rgba(227, 176, 75, 0.08); }
+.chip.ok    { color: var(--ok);   border-color: rgba(134, 201, 149, 0.35); background: rgba(134, 201, 149, 0.08); }
+.chip.warn::before { animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.25; } }
+
+/* ── Lỗi & banner mất kết nối ── */
+.error-msg {
+    color: var(--err);
+    font-size: 0.92rem;
+    min-height: 1.3em;
+    margin-top: 0.9rem;
+}
+
+.conn-banner {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    font-size: 0.9rem; font-weight: 600;
+    color: #2a1d0a;
+    background: var(--warn);
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+.conn-banner.show { transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+    .gear, .chip.warn::before, .spinner { animation: none !important; }
+    * { transition: none !important; }
+}

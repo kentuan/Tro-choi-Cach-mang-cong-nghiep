@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Vòng 1 – Sắp xếp chữ cái</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap&subset=vietnamese" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vong1.css') }}">
+</head>
+<body>
+    <div class="conn-banner" id="conn-banner">Mất kết nối với máy chủ, đang thử kết nối lại...</div>
+
+    <main class="game-container">
+        <!-- ═══ Header: Timer + Score ═══ -->
+        <header class="game-header">
+            <div class="header-left">
+                <div class="score-box">
+                    <span class="score-label">Điểm</span>
+                    <span class="score-value" id="score-value">0</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="timer-ring" id="timer-ring">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="timer-bg" cx="50" cy="50" r="45"/>
+                        <circle class="timer-fill" id="timer-fill" cx="50" cy="50" r="45"/>
+                    </svg>
+                    <span class="timer-text" id="timer-text">{{ vong1_time }}</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="question-counter">
+                    <span class="q-label">Câu</span>
+                    <span class="q-value" id="q-current">1</span>/<span class="q-total" id="q-total">?</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ═══ Câu hỏi ═══ -->
+        <section class="question-section panel" id="question-section">
+            <p class="question-text" id="question-text">Đang tải câu hỏi...</p>
+        </section>
+
+        <!-- ═══ Khu vực thẻ chữ (xáo trộn) ═══ -->
+        <section class="tiles-section" id="tiles-section">
+            <p class="section-label">Các chữ cái (kéo vào ô bên dưới)</p>
+            <div class="tiles-pool" id="tiles-pool"></div>
+        </section>
+
+        <!-- ═══ Ô đáp án ═══ -->
+        <section class="answer-section" id="answer-section">
+            <p class="section-label">Đáp án của bạn</p>
+            <div class="answer-slots" id="answer-slots"></div>
+        </section>
+
+        <!-- ═══ Nút kiểm tra + thông báo ═══ -->
+        <div class="actions">
+            <button class="btn btn-primary check-btn" id="check-btn" disabled>Kiểm tra</button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+
+        <!-- ═══ Màn hình kết thúc ═══ -->
+        <section class="end-screen panel" id="end-screen" style="display:none;">
+            <div class="big">⏱️</div>
+            <h2>Hết giờ!</h2>
+            <p>Tổng điểm của bạn: <strong id="final-score">0</strong></p>
+        </section>
+    </main>
+
+    <script>
+        // Truyền config từ server
+        window.VONG1_TIME = {{ vong1_time }};
+    </script>
+    <script src="{{ url_for('static', filename='js/vong1.js') }}"></script>
+</body>
+</html>
+

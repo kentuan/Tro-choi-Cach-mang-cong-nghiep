@@ -1,0 +1,34 @@
+{
+  "ten_lop": ["Lần thứ nhất", "Lần thứ hai", "Lần thứ ba", "Lần thứ tư"],
+  "the": [
+    { "tu": "Động cơ hơi nước", "lop": 0, "trang": 34 },
+    { "tu": "Cơ giới hoá", "lop": 0, "trang": 34 },
+    { "tu": "Đô thị hoá", "lop": 0, "trang": 34 },
+    { "tu": "Máy dệt cải tiến", "lop": 0, "trang": 34 },
+    { "tu": "Tàu thủy chạy bằng hơi nước", "lop": 0, "trang": 34 },
+    { "tu": "Đầu máy xe lửa chạy bằng hơi nước", "lop": 0, "trang": 34 },
+
+    { "tu": "Năng lượng điện", "lop": 1, "trang": 35 },
+    { "tu": "Điện khí hoá", "lop": 1, "trang": 35 },
+    { "tu": "Dây chuyền sản xuất hàng loạt quy mô lớn", "lop": 1, "trang": 35 },
+    { "tu": "Bóng đèn", "lop": 1, "trang": 35 },
+    { "tu": "Xe hơi động cơ đốt trong", "lop": 1, "trang": 35 },
+    { "tu": "Tua bin hơi phản lực", "lop": 1, "trang": 35 },
+
+    { "tu": "Công nghệ thông tin", "lop": 2, "trang": 36 },
+    { "tu": "Máy tính điện tử số ENIAC", "lop": 2, "trang": 36 },
+    { "tu": "Bóng bán dẫn", "lop": 2, "trang": 36 },
+    { "tu": "Bộ điều khiển logic có thể lập trình (PLC)", "lop": 2, "trang": 36 },
+    { "tu": "Internet", "lop": 2, "trang": 36 },
+    { "tu": "Robot công nghiệp", "lop": 2, "trang": 36 },
+
+    { "tu": "Công nghệ số", "lop": 3, "trang": 37 },
+    { "tu": "Trí tuệ nhân tạo (AI)", "lop": 3, "trang": 37 },
+    { "tu": "Dữ liệu lớn (Big data)", "lop": 3, "trang": 37 },
+    { "tu": "Điện toán đám mây", "lop": 3, "trang": 37 },
+    { "tu": "Internet vạn vật (IoT)", "lop": 3, "trang": 37 },
+    { "tu": "In 3D", "lop": 3, "trang": 37 },
+    { "tu": "Xe tự lái", "lop": 3, "trang": 37 },
+    { "tu": "Robot thế hệ mới", "lop": 3, "trang": 37 }
+  ]
+}

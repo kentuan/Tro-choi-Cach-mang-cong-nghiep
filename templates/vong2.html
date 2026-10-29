@@ -1,0 +1,53 @@
+<!-- ═══ BƯỚC 5: Vòng 2 – Ghép đôi (cùng trang, không chuyển URL) ═══ -->
+<section id="step-game-2" class="step">
+    <div class="game-container">
+        <header class="game-header">
+            <div class="header-left">
+                <div class="score-box">
+                    <span class="score-label">Điểm</span>
+                    <span class="score-value" id="v2-score">0</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="timer-ring">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="timer-bg" cx="50" cy="50" r="45"/>
+                        <circle class="timer-fill" id="v2-timer-fill" cx="50" cy="50" r="45"/>
+                    </svg>
+                    <span class="timer-text" id="v2-timer-text">{{ vong2_time }}</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="question-counter">
+                    <span class="q-label">Câu</span>
+                    <span class="q-value" id="v2-q-current">1</span>/<span class="q-total" id="v2-q-total">?</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="question-section panel">
+            <p class="question-text" id="v2-prompt">Đang tải câu hỏi...</p>
+        </section>
+
+        <section class="v2-pairs" id="v2-pairs"></section>
+
+        <section class="v2-pool-section">
+            <p class="section-label">Thẻ đáp án (kéo vào ô, hoặc bấm thẻ để tự điền vào ô trống đầu tiên)</p>
+            <div class="v2-pool" id="v2-pool"></div>
+        </section>
+
+        <div class="actions">
+            <button class="btn btn-primary check-btn" id="v2-check" disabled>Kiểm tra</button>
+            <button class="btn btn-ghost skip-btn" id="v2-skip" disabled>Bỏ qua</button>
+        </div>
+        <div class="feedback" id="v2-feedback"></div>
+
+        <section class="end-screen panel" id="v2-end" style="display:none;">
+            <div class="big" id="v2-end-icon">⏱️</div>
+            <h2 id="v2-end-title">Hết giờ!</h2>
+            <p>Tổng điểm của bạn: <strong id="v2-final-score">0</strong></p>
+            <p class="end-detail" id="v2-end-detail"></p>
+            <p class="end-note">Đang quay về màn hình chờ...</p>
+        </section>
+    </div>
+</section>

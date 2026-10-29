@@ -1,0 +1,75 @@
+/* ═══ Vòng 3 – Xếp dòng thời gian ═══
+   Thẻ (.v2-card), ô thả (.v2-slot), khay (.v2-pool) và thẻ "ma" khi kéo dùng lại từ vong2.css,
+   header/đồng hồ/màn kết thúc dùng lại từ vong1.css. File này chỉ khai báo trục thời gian. */
+
+.v3-timeline { margin-bottom: 1.2rem; }
+
+.v3-edge {
+    margin: 0 0 0.5rem 0.2rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+.v3-edge-end { margin: 0.5rem 0 0 0.2rem; }
+
+/* Mỗi hàng = số thứ tự trên trục + ô thả; đường dọc nối các số */
+.v3-rows { position: relative; display: grid; gap: 0.6rem; }
+.v3-rows::before {
+    content: "";
+    position: absolute;
+    left: 1.15rem;
+    top: 1.4rem;
+    bottom: 1.4rem;
+    width: 2px;
+    background: var(--line);
+}
+.v3-row {
+    display: grid;
+    grid-template-columns: 2.3rem minmax(0, 1fr);
+    gap: 0.7rem;
+    align-items: center;
+}
+.v3-num {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    border: 2px solid var(--brass);
+    border-radius: 50%;
+    background: var(--bg);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 800;
+    color: var(--brass-light);
+}
+.v3-rows .v2-slot { min-height: 50px; }
+
+/* Mốc thời gian hiện trong thẻ sau khi ô được khoá hoặc hiện đáp án */
+.v3-moc {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--brass-light);
+}
+.v2-slot.correct .v3-moc { color: var(--ok); }
+.v2-slot.revealed .v3-moc { color: var(--warn); }
+
+@media (max-width: 420px) {
+    .v3-row { grid-template-columns: 2rem minmax(0, 1fr); gap: 0.5rem; }
+    .v3-num { width: 2rem; height: 2rem; font-size: 0.9rem; }
+    .v3-rows::before { left: 1rem; }
+}
+
+/* ── Hết giờ / xong: chỉ còn màn kết thúc ── */
+#step-game-3.game-ended .game-header,
+#step-game-3.game-ended .question-section,
+#step-game-3.game-ended .v3-timeline,
+#step-game-3.game-ended .v2-pool-section,
+#step-game-3.game-ended .actions {
+    display: none;
+}

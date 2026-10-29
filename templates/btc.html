@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BTC - Quản lý trò chơi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Playfair+Display:wght@700;800&display=swap&subset=vietnamese" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lobby.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/btc.css') }}">
+</head>
+<body>
+    <div class="conn-banner" id="conn-banner">Mất kết nối với máy chủ, đang thử kết nối lại...</div>
+
+    <main class="page">
+        <header class="hero">
+            <svg class="gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="3.2"/>
+                <path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/>
+                <circle cx="12" cy="12" r="6.8"/>
+            </svg>
+            <h1 class="brand">Ban Tổ Chức</h1>
+            <p class="tagline">Quản lý trò chơi Cách mạng Công nghiệp</p>
+        </header>
+
+        <!-- Trạng thái + danh sách đội -->
+        <section class="panel">
+            <div class="status-bar">
+                <h2>Các đội tham gia (<span class="count" id="team-count">0</span>/4)</h2>
+                <span id="status-badge" class="status-badge status-waiting">⏳ Đang chờ các đội tham gia</span>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card" id="card-nhom-1">
+                    <div class="head"><span class="group-label">Nhóm 1</span><span class="chip" id="chip-nhom-1">Chưa vào</span></div>
+                    <div class="team-name empty" id="name-nhom-1">Chưa có đội</div>
+                </div>
+                <div class="team-card" id="card-nhom-2">
+                    <div class="head"><span class="group-label">Nhóm 2</span><span class="chip" id="chip-nhom-2">Chưa vào</span></div>
+                    <div class="team-name empty" id="name-nhom-2">Chưa có đội</div>
+                </div>
+                <div class="team-card" id="card-nhom-4">
+                    <div class="head"><span class="group-label">Nhóm 4</span><span class="chip" id="chip-nhom-4">Chưa vào</span></div>
+                    <div class="team-name empty" id="name-nhom-4">Chưa có đội</div>
+                </div>
+                <div class="team-card" id="card-nhom-5">
+                    <div class="head"><span class="group-label">Nhóm 5</span><span class="chip" id="chip-nhom-5">Chưa vào</span></div>
+                    <div class="team-name empty" id="name-nhom-5">Chưa có đội</div>
+                </div>
+            </div>
+
+            <!-- Nút điều khiển -->
+            <div class="controls">
+                <!-- Chỉ hiện khi server chạy với DEBUG=True -->
+                <div class="debug-box" id="debug-box" hidden>
+                    <label for="debug-round">🛠 DEBUG · chọn vòng để test nhanh</label>
+                    <select id="debug-round"></select>
+                </div>
+                <button class="btn btn-start" id="btn-start" disabled>▶ Bắt đầu vòng 1</button>
+                <button class="btn btn-reset" id="btn-reset">🔄 Reset</button>
+                <p class="hint" id="start-hint">Chưa có đội nào tham gia.</p>
+                <p id="error-btc" class="error-msg" role="alert"></p>
+            </div>
+        </section>
+
+        <section class="panel tv-controls-panel">
+            <div class="status-bar"><h2>Điều khiển màn hình TV</h2><a class="tv-open-link" href="/tv" target="_blank" rel="noopener">Mở /tv ↗</a></div>
+            <p class="scores-note">Chọn vòng, sau đó bấm nội dung muốn chiếu. Màn TV cập nhật ngay.</p>
+            <label class="tv-round-label" for="tv-round-select">Vòng hiển thị</label>
+            <select id="tv-round-select">
+                {% for round in rounds %}<option value="{{ round }}">Vòng {{ round }}</option>{% endfor %}
+                <option value="total">Tổng điểm</option>
+            </select>
+            <div class="tv-view-buttons" role="group" aria-label="Nội dung màn hình TV">
+                <button class="btn btn-ghost" data-tv-view="welcome">Chào mừng</button>
+                <button class="btn btn-ghost" data-tv-view="rules">Luật chơi</button>
+                <button class="btn btn-ghost" data-tv-view="guide">Hướng dẫn</button>
+                <button class="btn btn-ghost" data-tv-view="time">Thời gian</button>
+                <button class="btn btn-ghost" data-tv-view="scores">Điểm</button>
+            </div>
+            <p class="tv-control-status" id="tv-control-status">Đang tải trạng thái màn hình…</p>
+
+            <!-- Cho phép hiện điểm trên TV: tất cả hoặc từng đội (BTC luôn thấy đủ điểm ở đây) -->
+            <div class="tv-reveal" id="tv-reveal">
+                <div class="tv-reveal-head">
+                    <h3 id="tv-reveal-title">Hiện điểm trên TV</h3>
+                    <div class="tv-reveal-actions">
+                        <button class="btn btn-ghost" id="tv-reveal-all" type="button">Hiện tất cả</button>
+                        <button class="btn btn-ghost" id="tv-hide-all" type="button">Ẩn tất cả</button>
+                    </div>
+                </div>
+                <p class="tv-reveal-note" id="tv-reveal-note"></p>
+                <ol class="tv-reveal-list" id="tv-reveal-list"></ol>
+                <button class="btn btn-primary" id="tv-show-board" type="button" hidden>Chiếu bảng điểm này lên TV</button>
+            </div>
+        </section>
+
+        <!-- Điểm số: mỗi vòng công bố riêng -->
+        <section class="panel scores-panel" id="scores-panel" hidden>
+            <div class="status-bar">
+                <h2>Điểm số theo vòng</h2>
+            </div>
+            <p class="scores-note" id="v6-pairings-preview"></p>
+            <p class="scores-note">Ban tổ chức luôn thấy điểm trực tiếp. Các đội chỉ thấy điểm của một vòng sau khi bạn bấm Công bố vòng đó.</p>
+            <div class="scoreboards" id="rounds-scores"></div>
+        </section>
+        <section class="panel scores-panel" id="final-panel" hidden>
+            <div class="status-bar"><h2>Xếp hạng chung cuộc</h2></div>
+            <p class="scores-note">Tổng điểm sáu vòng; bằng điểm thì so vòng 6, vòng 5 rồi vòng 4.</p>
+            <div id="final-scores"></div>
+            <button class="btn btn-primary" id="btn-final" hidden>Công bố tổng kết</button>
+        </section>
+
+        <!-- Xuất kết quả -->
+        <section class="panel export-panel">
+            <div class="status-bar"><h2>Xuất kết quả</h2></div>
+            <p class="scores-note">Tải file Excel gồm điểm từng vòng, tổng điểm, xếp hạng và chi tiết. Tải được bất kỳ lúc nào; nên tải trước khi tắt hoặc khởi động lại server vì điểm sẽ bị xoá.</p>
+            <button class="btn btn-primary" id="btn-export" type="button">Tải kết quả Excel</button>
+            <p class="error-msg" id="export-msg" role="alert"></p>
+        </section>
+
+        <!-- Nhật ký -->
+        <div class="log-section" id="log-section">
+            <h3>Nhật ký</h3>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/lobby.js') }}"></script>
+    <script>
+        window.BTC_DEBUG = {{ debug|tojson }};
+        window.BTC_ROUNDS = {{ rounds|tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='js/btc.js') }}"></script>
+</body>
+</html>

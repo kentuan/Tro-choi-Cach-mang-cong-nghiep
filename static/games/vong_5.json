@@ -1,0 +1,158 @@
+[
+  {
+    "chu_de": "Khái quát về cách mạng công nghiệp",
+    "cau_hoi": "Cách mạng công nghiệp diễn ra khi có sự đột phá về lĩnh vực nào?",
+    "lua_chon": ["Công nghệ", "Nông nghiệp", "Văn hoá", "Thương mại"],
+    "dung": 0,
+    "trang": 33
+  },
+  {
+    "chu_de": "Khái quát về cách mạng công nghiệp",
+    "cau_hoi": "Cho tới nay, lịch sử loài người đã chứng kiến bao nhiêu cuộc cách mạng công nghiệp?",
+    "lua_chon": ["4", "3", "5", "6"],
+    "dung": 0,
+    "trang": 33
+  },
+  {
+    "chu_de": "Cách mạng công nghiệp lần thứ nhất",
+    "cau_hoi": "Cách mạng công nghiệp lần thứ nhất bắt đầu từ nước nào?",
+    "lua_chon": ["Anh", "Mỹ", "Đức", "Pháp"],
+    "dung": 0,
+    "trang": 34
+  },
+  {
+    "chu_de": "Cách mạng công nghiệp lần thứ nhất",
+    "cau_hoi": "Cách mạng công nghiệp lần thứ nhất bắt đầu từ thời gian nào?",
+    "lua_chon": ["Cuối thế kỉ XVIII", "Cuối thế kỉ XVII", "Cuối thế kỉ XIX", "Những năm 70 của thế kỉ XX"],
+    "dung": 0,
+    "trang": 34
+  },
+  {
+    "chu_de": "Cách mạng công nghiệp lần thứ nhất",
+    "cau_hoi": "Đặc trưng của cách mạng công nghiệp lần thứ nhất là gì?",
+    "lua_chon": [
+      "Năng lượng hơi nước và cơ giới hoá",
+      "Năng lượng điện và dây chuyền sản xuất hàng loạt quy mô lớn",
+      "Công nghệ thông tin và tự động hoá",
+      "Công nghệ số, tính kết nối và trí tuệ nhân tạo"
+    ],
+    "dung": 0,
+    "trang": 34
+  },
+  {
+    "chu_de": "Cách mạng công nghiệp lần thứ nhất",
+    "cau_hoi": "Trước cách mạng công nghiệp lần thứ nhất, nền kinh tế chủ yếu dựa vào đâu?",
+    "lua_chon": [
+      "Nông nghiệp, với sức người, sức kéo của động vật và năng lượng tự nhiên",
+      "Máy hơi nước và cơ giới hoá",
+      "Năng lượng điện",
+      "Công nghệ thông tin"
+    ],
+    "dung": 0,
+    "trang": 34
+  },
+  {
+    "chu_de": "Cách mạng công nghiệp lần thứ hai",
+    "cau_hoi": "Đặc trưng của cách mạng công nghiệp lần thứ hai là gì?",
+    "lua_chon": [
+      "Năng lượng điện và dây chuyền sản xuất hàng loạt quy mô lớn",
+      "Năng lượng hơi nước và cơ giới hoá",
+      "Công nghệ thông tin và tự động hoá",
+      "Công nghệ số, tính kết nối và trí tuệ nhân tạo"
+    ],
+    "dung": 0,
+    "trang": 35
+  },
+  {
+    "chu_de": "Cách mạng công nghiệp lần thứ hai",
+    "cau_hoi": "Cách mạng công nghiệp lần thứ hai đã mở đầu kỉ nguyên nào?",
+    "lua_chon": ["Điện khí hoá", "Cơ giới hoá", "Tự động hoá", "Số hoá"],
+    "dung": 0,
+    "trang": 35
+  },
+  {
+    "chu_de": "Cách mạng công nghiệp lần thứ hai",
+    "cau_hoi": "Cách mạng công nghiệp lần thứ hai gắn liền với sự phát triển của các cường quốc nào?",
+    "lua_chon": ["Anh, Đức và Hoa Kì", "Anh, Pháp và Nga", "Hoa Kì, Nhật Bản và Trung Quốc", "Đức, Ý và Tây Ban Nha"],
+    "dung": 0,
+    "trang": 35
+  },
+  {
+    "chu_de": "Cách mạng công nghiệp lần thứ ba",
+    "cau_hoi": "Cách mạng công nghiệp lần thứ ba khởi đầu từ nước nào?",
+    "lua_chon": ["Mỹ", "Anh", "Đức", "Nhật Bản"],
+    "dung": 0,
+    "trang": 36
+  },
+  {
+    "chu_de": "Cách mạng công nghiệp lần thứ ba",
+    "cau_hoi": "Đặc trưng của cách mạng công nghiệp lần thứ ba là gì?",
+    "lua_chon": [
+      "Công nghệ thông tin và tự động hoá",
+      "Năng lượng hơi nước và cơ giới hoá",
+      "Năng lượng điện và dây chuyền sản xuất hàng loạt quy mô lớn",
+      "Công nghệ số, tính kết nối và trí tuệ nhân tạo"
+    ],
+    "dung": 0,
+    "trang": 36
+  },
+  {
+    "chu_de": "Cách mạng công nghiệp lần thứ ba",
+    "cau_hoi": "Lực lượng lao động đứng trước thách thức nào trong cách mạng công nghiệp lần thứ ba?",
+    "lua_chon": [
+      "Bị thay thế bởi robot công nghiệp",
+      "Thiếu năng lượng hơi nước",
+      "Thiếu điện để sản xuất",
+      "Mất kết nối internet"
+    ],
+    "dung": 0,
+    "trang": 36
+  },
+  {
+    "chu_de": "Cách mạng công nghiệp lần thứ tư",
+    "cau_hoi": "Thuật ngữ “Công nghiệp 4.0” lần đầu tiên được sử dụng tại nước nào?",
+    "lua_chon": ["Đức", "Mỹ", "Anh", "Nhật Bản"],
+    "dung": 0,
+    "trang": 37
+  },
+  {
+    "chu_de": "Cách mạng công nghiệp lần thứ tư",
+    "cau_hoi": "Đặc trưng cơ bản của cách mạng công nghiệp lần thứ tư là gì?",
+    "lua_chon": [
+      "Công nghệ số, tính kết nối và trí tuệ nhân tạo",
+      "Công nghệ thông tin và tự động hoá",
+      "Năng lượng điện và dây chuyền sản xuất hàng loạt quy mô lớn",
+      "Năng lượng hơi nước và cơ giới hoá"
+    ],
+    "dung": 0,
+    "trang": 37
+  },
+  {
+    "chu_de": "Nhà máy thông minh",
+    "cau_hoi": "Nhà máy thông minh có khả năng vận hành như thế nào?",
+    "lua_chon": [
+      "Tự động hoá hoàn toàn và hoạt động 24/7",
+      "Chỉ hoạt động vào ban ngày",
+      "Vận hành hoàn toàn bằng sức người",
+      "Chỉ dùng năng lượng hơi nước"
+    ],
+    "dung": 0,
+    "trang": 38
+  },
+  {
+    "chu_de": "Đúng hay sai",
+    "cau_hoi": "Karl Benz là người chế tạo chiếc máy bay đầu tiên trên thế giới.",
+    "lua_chon": ["Đúng", "Sai"],
+    "dung": 1,
+    "giai_thich": "Karl Benz chế tạo xe hơi dùng động cơ đốt trong (1885); máy bay do anh em Wright chế tạo (1903).",
+    "trang": 35
+  },
+  {
+    "chu_de": "Đúng hay sai",
+    "cau_hoi": "Năm 2011, Diễn đàn kinh tế thế giới chính thức đánh dấu sự khởi đầu của cuộc cách mạng công nghiệp lần thứ tư.",
+    "lua_chon": ["Đúng", "Sai"],
+    "dung": 1,
+    "giai_thich": "Năm 2011 là lúc thuật ngữ Công nghiệp 4.0 lần đầu được dùng; mốc chính thức khởi đầu là năm 2016.",
+    "trang": 37
+  }
+]
