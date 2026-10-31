@@ -4,3 +4,4 @@ Flask-SQLAlchemy
 simple-websocket
 python-dotenv
 openpyxl
+eventlet
